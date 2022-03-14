@@ -12,7 +12,7 @@ Examples:
 from typing import List
 
 
-def find_maximal_subarray_sum2(nums: List[int], k: int) -> int:
+def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
     max_sum = nums[0]
     for key, _ in enumerate(nums):
         for i in range(k):
