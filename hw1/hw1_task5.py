@@ -10,13 +10,13 @@ Examples:
     result = 16
 """
 from typing import List
-from itertools import combinations
 
 
-def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
-    result_list = []
-    for j in range(1, k+1):
-        comb_list = list(combinations(nums, j))
-        for k in comb_list:
-            result_list.append(sum(k))
-    return max(result_list)
+def find_maximal_subarray_sum2(nums: List[int], k: int) -> int:
+    max_sum = nums[0]
+    for key, _ in enumerate(nums):
+        for i in range(k):
+            current_subarray_sum = sum(nums[key:key+i+1])
+            if max_sum < current_subarray_sum:
+                max_sum = current_subarray_sum
+    return max_sum
