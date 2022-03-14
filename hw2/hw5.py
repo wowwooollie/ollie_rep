@@ -27,9 +27,7 @@ def custom_range(**kwargs) -> List[Any]:
 
 
 def custom_range2(line, stop, start=None, step=None) -> List[Any]:
-    if start is None and step is None:
-        return line[:line.index(stop)]
-    elif start is not None and step is None:
+    if step is None:
         return line[:line.index(stop)]
     elif start is not None and step is not None:
         return line[line.index(start):line.index(stop):step]
@@ -40,13 +38,11 @@ def custom_range2(line, stop, start=None, step=None) -> List[Any]:
         3) line, start, stop and step""")
 
 
+# test_dict = {'iter_object': string.ascii_lowercase, 'stop': 'z', 'start': 'a', 'step': 2}
+test_dict = {'iter_object': string.ascii_lowercase, 'stop': 'a', 'start': 'z', 'step': -1}
+print(custom_range(**test_dict))  # calling the first option of the custom_range function
+
 try:
     print(custom_range2(string.ascii_lowercase, 'h', step=2))  # calling the second option of the custom_range function
 except TypeError as er:
     print(er)
-
-# test_dict = {'iter_object': string.ascii_lowercase, 'stop': 'z', 'start': 'a', 'step': 2}
-test_dict = {'iter_object': string.ascii_lowercase, 'stop': 'a', 'start': 'z', 'step': -1}
-# calling the first option of the custom_range function
-
-print(custom_range(**test_dict))
