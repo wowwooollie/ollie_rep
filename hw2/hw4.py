@@ -18,7 +18,6 @@ val_2 = cache_func(*some)
 assert val_1 is val_2
 
 """
-from datetime import datetime
 from functools import lru_cache
 
 
@@ -29,22 +28,25 @@ def pow_func(a, b):
 def cache(func):
     @lru_cache()
     def inner_func(*args):
+        print(inner_func.cache_info())
         return func(*args)
     return inner_func
 
 
 cache_pow_func = cache(pow_func)
-some = 1888888, 178888
+some = 188, 10
 
-then = datetime.utcnow()
 val_1 = cache_pow_func(*some)
-now = datetime.utcnow()
-print(str((now - then).total_seconds()))  # 0.76659
+print(str(val_1) + '\n-----------------\n')
+# Output:
+# CacheInfo(hits=0, misses=1, maxsize=128, currsize=0)
+# 3041984419006637129052326510451878234398130176
+# -----------------
 
-then = datetime.utcnow()
 val_2 = cache_pow_func(*some)
-now = datetime.utcnow()
-print(str((now - then).total_seconds()))  # 0.0
+print(str(val_2))
+# Output:
+# 3041984419006637129052326510451878234398130176
 
-
-assert val_1 is val_2
+# We see result of the CacheInfo() function only for the first time. That means, that our 'wrapped' function
+# (pow_func) have been executed only once. For the second time CACHED result of the first call was used.
