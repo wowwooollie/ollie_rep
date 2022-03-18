@@ -22,10 +22,7 @@ def is_armstrong(number: int) -> bool:
     num_in_list = [int(i) for i in str(number)]
     mapped_numbers = list(map(lambda x: x ** len(num_in_list), num_in_list))
     result = sum(mapped_numbers)
-    if result == number:
-        return True
-    else:
-        return False
+    return True if result == number else False
 
 
 assert is_armstrong(153) == True, 'Is Armstrong number'
