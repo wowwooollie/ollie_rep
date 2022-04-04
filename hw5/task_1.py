@@ -22,7 +22,6 @@ class Student:
             return homework
         else:
             print("You are late.")
-            return None
 
 
 class Teacher:
