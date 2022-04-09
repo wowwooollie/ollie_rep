@@ -10,17 +10,7 @@ def fizzbuzz(n: int) -> List[str]:
     >>> fizzbuzz(0)
     []
     """
-    result_list = []
-    for i in range(1, n+1):
-        if i % 15 == 0:
-            result_list.append('fizzbuzz')
-        elif i % 3 == 0:
-            result_list.append('fizz')
-        elif i % 5 == 0:
-            result_list.append('buzz')
-        else:
-            result_list.append(f"{i}")
-    return result_list
+    return [('fizz'*(not i % 3) + 'buzz'*(not i % 5) or f'{i}') for i in range(1, n+1)]
 
 
 if __name__ == "__main__":
