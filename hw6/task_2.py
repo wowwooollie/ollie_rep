@@ -44,7 +44,7 @@ class Student(Person):
 
 
 class Teacher(Person):
-    homework_done = defaultdict(str)
+    homework_done = defaultdict(list)
 
     @staticmethod
     def create_homework(text, deadline):
@@ -52,8 +52,10 @@ class Teacher(Person):
 
     @classmethod
     def check_homework(cls, hw_result: HomeworkResult):
-        if len(hw_result.solution) > 5 and hw_result.solution not in cls.homework_done.values():
-            cls.homework_done[hw_result.homework, hw_result.author] = hw_result.solution
+        solution = hw_result.solution
+        hw = hw_result.homework
+        if len(solution) > 5 and solution not in cls.homework_done[hw]:
+            cls.homework_done[hw].append(hw_result)
             return True
         else:
             return False
@@ -61,13 +63,7 @@ class Teacher(Person):
     @classmethod
     def reset_results(cls, hw=None):
         if isinstance(hw, Homework):
-            to_pop_list = []  # have to store keys for elements I want to pop from our dict because I can't pop them
-            # during cycle, because it's now allowed to change dictionary's size
-            for key, value in cls.homework_done.items():
-                if key[0] == hw:
-                    to_pop_list.append(key)
-            for i in to_pop_list:
-                cls.homework_done.pop(i)
+            cls.homework_done.pop(hw)
 
         elif hw is None:
             cls.homework_done.clear()
